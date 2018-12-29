@@ -25,7 +25,7 @@ SECRET_KEY = '3!ad67q&s3vd$^m(f4bi0rxn7nr_2safhp!)f(x+@d_5me45s$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'django.contrib.admin',
+    'social_django',
+    'images',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    #'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmarks.urls'
@@ -63,6 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                #'social_django.context_processors.backends',
+                #'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -136,3 +143,25 @@ EMAIL_HOST_USER = 'vikesh.happy2@gmail.com'
 EMAIL_HOST_PASSWORD = 'Vikesh@0610'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+AUTHENTICATION_BACKENDS = (
+
+        'django.contrib.auth.backends.ModelBackend',
+        'account.authentication.EmailAuthBackend',
+
+        'social_core.backends.facebook.FacebookOAuth2',
+        'social_core.backends.google.GoogleOAuth2',
+        'social_core.backends.twitter.TwitterOAuth',
+    )
+
+#Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '1199519800196143'
+SOCIAL_AUTH_FACEBOOK_SECRET ='4c1850bd1db6985fe3768e9f8d4ade05'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['vikesh.happy2@gmail.com']
+#TwitterOAuth
+SOCIAL_AUTH_TWITTER_KEY = 'a5S8Ri2CDj0qV1fZbF7o7etkD'
+SOCIAL_AUTH_TWITTER_SECRET = '2nx05Uympeb0hf6GET5AQqx2eHi81NPz41VFXSaFDs82Ukhw6Z'
+#GoogleOAuth
+#do it later
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '319656651535-q6gtq4fkm6l1ikann7hk5quqjf6eknh9.apps.googleusercontent.com'
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'F_prPoKB_S5J7qmIg9MIWfNz'
